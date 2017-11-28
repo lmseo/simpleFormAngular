@@ -5,14 +5,12 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppComponent } from './app.component';
-import { UsernameComponent } from './username/username.component';
 import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsernameComponent,
     SignupComponent
   ],
   imports: [
