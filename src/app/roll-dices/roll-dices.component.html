@@ -1,0 +1,74 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Roll the Dice!!</h1>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="roll-dice">
+  <div class="container">
+  	<div class="row">
+      <div class="col-md-6">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="numberRolls">Number of Rolls</label>
+          <div class="input-group">
+            <input type="text" 
+            [ngModel]="numberRolls" 
+            name="numberRolls" 
+            id="numberRolls" 
+            (ngModelChange)="onNumberRollsChange($event)" 
+            class="form-control"
+            required
+            #rolls="ngModel" >
+            <span class="input-group-addon">1-∞</span>
+          </div>
+          <div *ngIf="rolls.invalid && (rolls.dirty || rolls.touched)"
+             class="alert alert-danger">
+            <div *ngIf="rolls.errors.required">
+              Number of rolls is required.
+            </div>
+            <div *ngIf="!rolls.errors.min">
+              Number of rolls must be at least 1 number long.
+            </div>
+            <div *ngIf="rolls.errors.max">
+              Number of rolls cannot be more 100000.
+            </div>
+          </div>
+        </div>
+      		<label for="numberDice">Number of dice</label>
+        <div class="input-group">
+          <input type="text" [ngModel]="numberDice" name="numberDice" id="numberDice" (ngModelChange)="onNumberDiceChange($event)" class="form-control" required>
+          <span class="input-group-addon">1-∞</span>
+        </div>
+          <div class="alert alert-danger">It is not a number</div>
+      		<label for="yourNumber">Your number (1-6)</label>
+        <div class="input-group">
+          <input type="text" [ngModel]="yourNumber" name="yourNumber" id="yourNumber" (ngModelChange)="onYourNumberChange($event)" class="form-control" required>
+          <span class="input-group-addon">1-6</span>
+        </div>
+        <div class="alert alert-danger">It is not a number</div>
+  		  <button class="btn btn-primary" (click)="rollDice()" [disabled]="!f.valid">Roll de Dice</button>
+        </form>
+      </div>
+  	</div>
+  	<div class="row">
+      <div class="col-md-6">
+        <div *ngIf="f.valid; else formValid">
+          <hr>
+          The number of times your number <span class="badge">{{yourNumber}}</span> matches when <span class="badge">{{numberDice}}</span> <span *ngIf="numberDice===1; else dice">die </span><ng-template #dice>dice </ng-template> are rolled <div class="badge">{{numberRolls}}</div> times
+        </div>
+        <ng-template #formValid>
+          <hr>
+          <div class="alert alert-warning">Please check error messages above</div>
+        </ng-template>
+        <hr>
+        <div class="alert alert-success">
+          Matches {{hits}}
+        </div>
+      </div>
+  	</div>
+  </div>
+</section>

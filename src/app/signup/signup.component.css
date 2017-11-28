@@ -1,0 +1,14 @@
+.input-group .form-control:first-child{
+  border-bottom-left-radius: 0;
+}
+.input-group-addon:last-child{
+  border-bottom-right-radius: 0;
+}
+.alert.alert-danger{
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+}
+input.ng-touched.ng-invalid, input.ng-dirty.ng-invalid{
+  border:1px solid red;
+}
